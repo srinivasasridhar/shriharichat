@@ -1,21 +1,27 @@
 {
   "expo": {
-    "name": "ApnaKarcha",
-    "slug": "ApnaKarcha",
-    "version": "1.0.0",
+    "name": "ShriHariChat",
+    "slug": "ShriHariChat",
+    "version": "1.0.3",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/appstore.png",
+    //"icon": "./assets/images/bg-wallpaper-1.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.honeyshri.ShriHariChat"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/playstore.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.honeyshri.ShriHariChat"
     },
     "web": {
       "bundler": "metro",
@@ -27,15 +33,43 @@
       [
         "expo-splash-screen",
         {
+          "backgroundColor": "#232323",
           "image": "./assets/images/splash-icon.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "imageWidth": 400,
+          "enableFullScreenImage_legacy": false
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your friends."
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
+          "recordAudioAndroid": true
         }
       ]
     ],
+    "splash": {
+    "image": "./assets/images/bg-wallpaper-1.png",
+    "resizeMode": "cover",
+    "backgroundColor": "#FFFFFF"
+  },
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "28f9307e-2349-45c6-aabb-5ce8ca60edc4"
+      }
+    },
+    "owner": "honeyshri"
   }
 }

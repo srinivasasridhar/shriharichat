@@ -1,4 +1,4 @@
-import { ActivityIndicator, Alert, Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Alert, Button, ImageBackground, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useRef, useState } from 'react'
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Image } from 'expo-image';
@@ -16,6 +16,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { Cloudinary } from '@cloudinary/url-gen';
 import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
 import * as FileSystem from 'expo-file-system';
+
 
 const Profile = () => {
     const router = useRouter();
@@ -189,77 +190,82 @@ const Profile = () => {
             setLoading(false);
         }
     }
+    const image = require('@/assets/images/bg-wallpaper-2.png');
     return (
-        <CustomKeyboardView>
-            <View className="flex-1 mt-3">
-                <StatusBar style='dark' />
-                <View className="flex-1 gap-2 justify-center items-center">
-                    <Image
-                        style={styles.image}
-                        source={profileUrlRef.current}
-                        placeholder={{ blurhash }}
-                        transition={1000}
-                    />
-                    <TouchableOpacity onPress={selectOptions} style={{ height: hp(4) }} className="bg-neutral-200 px-3 rounded-xl flex-row gap-2 items-center justify-center">
-                        <Feather name="edit" size={hp(2)} />
-                        <Text style={{ fontSize: hp(1.8) }} className="font-semibold text-black">Change</Text>
-                    </TouchableOpacity>
-                    {/* <Button title="Change" onPress={pickImage} />
-                    <Button title="Options" onPress={selectOptions} /> */}
-                </View>
-                <View className="flex-1">
-                    <View className='gap-5 mx-2'>
-                        <View style={{ height: hp(7) }} className="px-4 flex-row gap-4 rounded-xl items-center">
-                            <Octicons name="mail" size={hp(2.7)} color="gray" />
-                            <Text style={{ fontSize: hp(2) }} className="flex-1 font-semibold text-neutral-500">{user?.email}</Text>
-                        </View>
-                        <View style={{ height: hp(7) }} className="bg-neutral-50 px-4 flex-row gap-4 rounded-xl items-center">
-                            <Feather name="user" size={hp(2.7)} color="gray" />
-                            <TextInput
-                                onChangeText={value => usernameRef.current = value}
-                                placeholder="Display Name"
-                                placeholderTextColor={"gray"}
-                                style={{ fontSize: hp(2), height: hp(6) }}
-                                className="flex-1 font-semibold text-neutral-700"
-                                defaultValue={user?.username}
-                            />
-                        </View>
+        //<CustomKeyboardView>
+        <ImageBackground
+            source={image}
+            resizeMode="cover"
+            className="flex-1 justify-center h-full"
+        >
+            <ScrollView className='flex-1'>
 
-                        {/* Submit Button */}
-                        <View className='flex-row justify-center m-4  gap-4'>
-                            {
-                                loading ? (
-                                    <View className='flex-row justify-center gap-4'>
-                                        <TouchableOpacity style={{ height: hp(5), width: 150 }} className="bg-indigo-500 rounded-xl items-center px-8 justify-center">
-                                            <ActivityIndicator size="small" color="#ffffff" />
-                                        </TouchableOpacity>
-
-                                    </View>
-                                ) : (
-                                    <View className='flex-row justify-center gap-4'>
-                                        <TouchableOpacity onPress={uploadImage} style={{ height: hp(5), width: 150 }} className="bg-indigo-500 rounded-xl items-center justify-center">
-                                            <Text style={{ fontSize: hp(2) }} className="font-semibold text-white">Update</Text>
-                                        </TouchableOpacity>
-
-                                    </View>
-                                )
-                            }<TouchableOpacity onPress={handleSignout} style={{ height: hp(5), width: 150 }} className="bg-red-400 rounded-xl flex px-4 justify-center items-center">
-                                <View style={{ fontSize: hp(2) }} className="font-semibold text-white  gap-2 flex-row items-center justify-center">
-                                    <Ionicons name="arrow-back-circle-outline" size={hp(2.7)} color="white" />
-                                    <Text style={{ fontSize: hp(2) }} className="font-semibold text-white">Sign Out</Text>
-                                </View>
-                            </TouchableOpacity>
-                        </View>
-
-
-
+                <View className="flex-1 rounded-2xl h-full">
+                    <StatusBar style='dark' />
+                    <View className="flex-1 gap-2 items-center">
+                        <Image
+                            style={styles.image}
+                            source={profileUrlRef.current}
+                            placeholder={{ blurhash }}
+                            transition={1000}
+                        />
+                        <TouchableOpacity onPress={selectOptions} style={{ height: hp(4) }} className="bg-neutral-200 px-3 rounded-xl flex-row gap-2 items-center justify-center">
+                            <Feather name="edit" size={hp(2)} />
+                            <Text style={{ fontSize: hp(1.8) }} className="font-semibold text-black">Change</Text>
+                        </TouchableOpacity>
                     </View>
+                    <View className="flex-1">
+                        <View className='gap-5 mx-2'>
+                            <View style={{ height: hp(7) }} className="px-4 flex-row gap-4 rounded-xl items-center">
+                                <Octicons name="mail" size={hp(2.7)} color="gray" />
+                                <Text style={{ fontSize: hp(2) }} className="flex-1 font-semibold text-neutral-500">{user?.email}</Text>
+                            </View>
+                            <View style={{ height: hp(7) }} className="bg-neutral-50 px-4 flex-row gap-4 rounded-xl items-center">
+                                <Feather name="user" size={hp(2.7)} color="gray" />
+                                <TextInput
+                                    onChangeText={value => usernameRef.current = value}
+                                    placeholder="Display Name"
+                                    placeholderTextColor={"gray"}
+                                    style={{ fontSize: hp(2), height: hp(6) }}
+                                    className="flex-1 font-semibold text-neutral-700"
+                                    defaultValue={user?.username}
+                                />
+                            </View>
 
+                            {/* Submit Button */}
+                            <View className='flex-row justify-center m-4  gap-4'>
+                                {
+                                    loading ? (
+                                        <View className='flex-row justify-center gap-4'>
+                                            <TouchableOpacity style={{ height: hp(5), width: 150 }} className="bg-indigo-500 rounded-xl items-center px-8 justify-center">
+                                                <ActivityIndicator size="small" color="#ffffff" />
+                                            </TouchableOpacity>
+
+                                        </View>
+                                    ) : (
+                                        <View className='flex-row justify-center gap-4'>
+                                            <TouchableOpacity onPress={uploadImage} style={{ height: hp(5), width: 150 }} className="bg-indigo-500 rounded-xl items-center justify-center">
+                                                <Text style={{ fontSize: hp(2) }} className="font-semibold text-white">Update</Text>
+                                            </TouchableOpacity>
+
+                                        </View>
+                                    )
+                                }<TouchableOpacity onPress={handleSignout} style={{ height: hp(5), width: 150 }} className="bg-red-400 rounded-xl flex px-4 justify-center items-center">
+                                    <View style={{ fontSize: hp(2) }} className="font-semibold text-white  gap-2 flex-row items-center justify-center">
+                                        <Ionicons name="arrow-back-circle-outline" size={hp(2.7)} color="white" />
+                                        <Text style={{ fontSize: hp(2) }} className="font-semibold text-white">Sign Out</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
+
+
+
+                        </View>
+                    </View>
                 </View>
-
-
-            </View>
-        </CustomKeyboardView>
+            </ScrollView>
+        </ImageBackground>
+        //</CustomKeyboardView>
 
     )
 }
@@ -276,7 +282,8 @@ const styles = StyleSheet.create({
         aspectRatio: 1,
         borderRadius: "100%",
         borderWidth: 2,
-        borderColor: "#94a3b8"
+        borderColor: "#94a3b8",
+        marginTop: 20
     },
     imageBg: {
         flex: 1,

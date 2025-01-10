@@ -1,4 +1,4 @@
-import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useAuth } from '@/context/authContext';
 //import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -44,14 +44,20 @@ const HomePage = () => {
     const handleLogout = async () => {
         await logout();
     };
-    //console.log("user-homepage", user);
+    const image = require("@/assets/images/bg-wallpaper-2.png");
     return (
 
         <View className='flex-1' >
             <StatusBar style="light" />
             {
                 users.length > 0 ? (
-                    <ChatList users={users} />
+                    <ImageBackground
+                        source={image}
+                        resizeMode="cover"
+                        className="flex-1 justify-center"
+                    >
+                        <ChatList users={users} />
+                    </ImageBackground>
 
                 ) : (
                     <View className='flex-1 items-center' style={{ top: hp(30) }} >

@@ -66,6 +66,7 @@ export const wp = (percent) => {
 };
 
 export const getInitials = (name) => {
-  const [firstName, lastName] = name.split(" ");
-  return firstName.charAt(0) + lastName.charAt(0);
+  //const [firstName, lastName] = name.split(" ");
+  //return firstName.charAt(0) + lastName.charAt(0);
+  return name.charAt(0);
 };

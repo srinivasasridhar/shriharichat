@@ -28,6 +28,7 @@ export default function CustomKeyboardView({ children, inChat }) {
           {...scrollViewConfig}
           bounces={false}
           showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="always"
         >
           {children}
         </ScrollView>

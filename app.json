@@ -2,7 +2,7 @@
   "expo": {
     "name": "ShriHariChat",
     "slug": "ShriHariChat",
-    "version": "1.0.3",
+    "version": "1.0.5",
     "orientation": "portrait",
     "icon": "./assets/images/appstore.png",
     //"icon": "./assets/images/bg-wallpaper-1.png",
@@ -34,7 +34,7 @@
         "expo-splash-screen",
         {
           "backgroundColor": "#232323",
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/appstore.png",
           "imageWidth": 400,
           "enableFullScreenImage_legacy": false
         }

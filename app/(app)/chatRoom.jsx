@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, Alert, ScrollView, Keyboard, Image, Button, Pressable } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, Alert, ScrollView, Keyboard, Image, Button, Pressable, ImageBackground } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 import { useLocalSearchParams, useRouter } from 'expo-router'
 import { StatusBar } from 'expo-status-bar';
@@ -42,24 +42,24 @@ export default function ChatRoom() {
                 messages.push(doc.data());
             });
             setMessages([...messages]);
-            //updateScollView();
+            updateScollView();
         });
 
-        //const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', updateScollView);
+        const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', updateScollView);
         return () => {
             unsubscribe();
-            //keyboardDidShowListener.remove();
+            keyboardDidShowListener.remove();
         }
 
 
     }, []);
 
-    // useEffect(() => {
-    //     updateScollView();
-    // }, [messages]);
+    useEffect(() => {
+        updateScollView();
+    }, [messages]);
 
     const updateScollView = () => {
-        setTimeout(() => scrollViewRef.current.scrollToEnd({ duration: 500, animated: true }), 1000);
+        setTimeout(() => scrollViewRef.current?.scrollToEnd({ duration: 500, animated: true }), 1000);
     }
 
     const createRoomIfNotExists = async () => {
@@ -169,7 +169,7 @@ export default function ChatRoom() {
 
 
     //console.log('Messages', messages);
-    const image = require("@/assets/images/bg-wallpaper-1.png");
+    const image = require("@/assets/images/bg-wallpaper-2.png");
     return (
         <CustomKeyboardView inChat={true}>
             <View className='flex-1 bg-white' >
@@ -178,15 +178,27 @@ export default function ChatRoom() {
                 <View className='h-3 border-b border-neutral-300'></View>
 
                 <View className='flex-1 justify-between overflow-visible bg-neutral-100'  >
-                    <View className='flex-1'>
-                        {
-                            messages.length == 0 &&
-                            <View className='flex-1 justify-center items-center'>
-                                <Text className='text-neutral-400'>No messages</Text>
-                            </View>
-                        }
-                        <MessageList messages={messages} currentUser={user} />
-                    </View>
+                    {
+                        messages.length === 0 ?
+                            (
+                                <View className='flex-col items-center justify-center h-96'>
+                                    <Image
+                                        source={{ uri: "https://img.freepik.com/free-vector/man-woman-chatting-online-people-using-mobile-phones-speech-bubble-distance-flat-vector-illustration-communication-internet_74855-8440.jpg" }}
+                                        style={{ width: wp(100), height: hp(40), resizeMode: 'contain' }} />
+                                    <Text className='text-neutral-500 text-2xl font-semibold'>No Messages</Text>
+                                    <Text className='text-neutral-400 text-2xl font-semibold'>Start the Conversation !!</Text>
+                                </View>
+                            )
+                            :
+                            (
+                                <ImageBackground
+                                    source={image}
+                                    resizeMode="cover"
+                                    className="flex-1 justify-center"
+                                >
+                                    <MessageList scrollViewRef={scrollViewRef} messages={messages} currentUser={user} /></ImageBackground>
+                            )
+                    }
                     <View
                         style={{ width: wp(100) }}
                         className='h-26 p-2 pb-4 flex-row items-center bg-neutral-500 overflow-scroll'>

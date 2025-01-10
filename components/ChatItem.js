@@ -63,7 +63,7 @@ export default function ChatItem({ item, router, noBorder, idx }) {
     <TouchableOpacity
       onPress={openChatRoom}
       className={`flex-row items-center justify-between pb-2 mx-4 mb-4 gap-3 ${
-        noBorder ? "" : "border-b border-b-neutral-200"
+        noBorder ? "" : "border-b border-b-indigo-300"
       }`}
     >
       <Image

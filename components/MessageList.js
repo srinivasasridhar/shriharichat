@@ -7,13 +7,25 @@ export default function MessageList({ messages, scrollViewRef, currentUser }) {
     <ScrollView
       ref={scrollViewRef}
       showsVerticalScrollIndicator={false}
-      contentContainerStyle={{ flex: 1, justifyContent: "flex-end" }}
+      contentContainerStyle={
+        {
+          //flex: 1,
+          //justifyContent: "flex-end",
+          //overflow: "visible",
+        }
+      }
     >
-      {messages.map((message, idx) => {
-        return (
-          <MessageItem key={idx} message={message} currentUser={currentUser} />
-        );
-      })}
+      <View className="flex-end">
+        {messages.map((message, idx) => {
+          return (
+            <MessageItem
+              key={idx}
+              message={message}
+              currentUser={currentUser}
+            />
+          );
+        })}
+      </View>
     </ScrollView>
   );
 }
